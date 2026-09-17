@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Cat } from '../components/Cat';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
 export const Register = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [errorMsg, setErrorMsg] = useState('');
@@ -172,7 +174,7 @@ export const Register = () => {
     setSuccessMsg('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/register', {
+      const response = await fetch(`${API_BASE_URL}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

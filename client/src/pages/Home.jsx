@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
 export const Home = () => {
   const { user, token, logout } = useAuth();
   const [usersList, setUsersList] = useState([]);
@@ -12,7 +14,7 @@ export const Home = () => {
       if (!token) return;
 
       try {
-        const response = await fetch('http://localhost:5000/api/users', {
+        const response = await fetch(`${API_BASE_URL}/api/users`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

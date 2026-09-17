@@ -2,6 +2,8 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 
 const AuthContext = createContext(null);
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem('auth_token') || null);
   const [user, setUser] = useState(null);
@@ -12,7 +14,7 @@ export const AuthProvider = ({ children }) => {
       const storedToken = localStorage.getItem('auth_token');
       if (storedToken) {
         try {
-          const response = await fetch('http://localhost:5000/api/me', {
+          const response = await fetch(`${API_BASE_URL}/api/me`, {
             headers: {
               'Authorization': `Bearer ${storedToken}`
             }
